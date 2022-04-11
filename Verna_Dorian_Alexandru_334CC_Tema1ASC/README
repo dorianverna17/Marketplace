@@ -1,0 +1,91 @@
+Verna Dorian-Alexandru 334CC
+Tema 1 ASC
+
+Organizare:
+
+-> Am urmat urmatorii pasi in implementare:
+    - am completat consumer.py si producer.py prima oara
+    (pe baza informatiilor date pe ocw si pe forum)
+    - am completat apoi metodele din marketplace.py
+
+-> Abordare generala:
+    - producer.py: in producer am implementat producatorul
+    astfel incat sa produca fiecare element pe care il
+    are acesta in lista de produse. Daca metoda publish s-a
+    efectuat cu succes atunci asteapta atat cat trebuie
+    pentru produsul respectiv, iar daca nu, atunci asteapta
+    timpul default.
+    - consumer.py: in consumer ma iau fiecare operatie pe
+    care acesta doreste sa o realizeze si incerc sa o fac
+    pana cand se termina cu succes. DUpa ce s-au rezolvat
+    toate operatiile, atunci printez rezultatul lui order_place 
+    - ca si idee de implementare, folosesc un dictionar
+    in care ca si cheie retin producatorul, iar ca si valoare
+    numarul de produse pe care acesta le are in market,
+    apoi mai am un dictionar unde ca si cheie am cart-ul 
+    respectiv, iar ca si valoare am o lista cu produsele
+    din acel cart (nu sunt produse, ci liste pentru ca 
+    sunt de forma [producer_id, product, cart_id], deci 
+    produsul propriu-zis e la index-ul 1 - nu am folosit
+    tupluri pentru ca voiam sa am libertate in a modifica 
+    elementele listei). Toate produsele care nu sunt in
+    cart-uri sunt puse intr-o lista mare (tot sub forma de 
+    liste mai mici cum am prezentat anterior)
+    - Din punctul meu de vedere, in implementarea mea au
+    fost necesare 4 lock-uri: unul pentru a ma asigura 
+    ca nu este race condition la modificarea size-ului 
+    cozii de produse dintr-un producer, unul pentru
+    a ma asigura ca nu este race condition la modificarea
+    dictionarului de cart-uri, unul pentru a ma asigura ca
+    nu este race condition la modificarea listei de produse 
+    si inca unul pentru a ma asigura ca nu este race 
+    condition la modificarea size-ului de cart-uri
+    - am realizat clasa TestMarketplace in fisierul
+    marketplace.py, acolo am testat fiecare metoda.
+    - partea de logging am implementat-o tot in acest fisier
+    (in constructor fac configuratiile necesare despre
+    care se vorbeste in enunt, apoi in metode printez cu 
+    'info()')
+    - Pentru unitteste am creat un inner class ca sa 
+    simulez un produs
+
+
+-> Utilitate tema:
+    - Tema a fost destul de utila, mi-a placut pentru ca 
+    a fost in python si am putut sa mai invat niste lucruri
+    noi pentru ca nu am mai lucrat in python la facultate.
+    De asemenea, mi s-a parut folositor ca a inclus si
+    elemente de unittesting si logging
+
+-> Consider implementarea mea ca este ok, nu pot spune ca a
+    fost neaparat naiva, dar nici ca a fost cea mai eficienta.
+    Un lucru care cred ca ar fi fost mai eficient era sa
+    retin un dictionar in marketplace. Ca intrare pentru dictionar
+    sa am producer-ul, iar ca valoare sa fie lista produselor
+    acestuia. Eu retin intr-o lista mai mare mai multe liste
+    care au formatul [producer_id, product, cart_id]
+
+Implementare:
+-> Consider ca am implementat intreg-ul enunt al tempfile
+-> Nu consider ca exista functionalitati extract_stack
+-> Nu consider ca exista functionalitati lipsa
+-> am avut dificultati in intelegerea enuntului, consider
+ca functionalitatea producer-ului si consumerului puteau 
+fi explicate mai bine (a trebuit sa studiez destul de mult 
+fisierele .in ca sa imi dau seama de unele aspecte). De 
+asemenea, a trebuit sa rezolv multe race condition-uri.
+-> A fost interesant unittesting-ul si logging-ul pentru
+ca nu am mai facut asta pana acum.
+
+Resurse utilizate:
+https://docs.python.org/3/library/logging.html#logging.Formatter.formatTime
+https://docs.python.org/3/howto/logging.html
+https://docs.python.org/3/library/logging.handlers.html#logging.handlers.RotatingFileHandler
+https://stackoverflow.com/questions/6321160/how-to-set-timestamps-on-gmt-utc-on-python-logging
+https://ocw.cs.pub.ro/courses/asc/laboratoare/02
+
+Nu am un link pt repo-ul de git, dar am adaugat .git pentru 
+ca am facut niste commit-uri pe masura ce am implementat tema
+
+Verna Dorian-Alexandru 334CC
+Tema 1 ASC
